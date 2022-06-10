@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const actionsModel = require('./actions-model');
 const { validateActionId,
-        validateActionPost } = require('./actions-middlware');
+        validateActionPost,
+        validateActionUpdate } = require('./actions-middlware');
 
 router.get('/', (req, res, next) => {
     actionsModel.get()
@@ -32,6 +33,12 @@ router.delete('/:id', validateActionId, (req, res, next) => {
         res.status(200).end();
     })
     .catch(next)
+})
+
+router.put('/:id', validateActionId, validateActionUpdate, (req, res, next) => {
+    actionsModel.update(req.params.id, req.body)
+    .then(updatedAction => res.json(updatedAction))
+    .catch(next);
 })
 
 module.exports = router;

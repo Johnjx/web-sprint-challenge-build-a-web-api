@@ -71,7 +71,46 @@ const validateActionPost = (req, res, next) => {
     }
 }
 
+const validateActionUpdate = (req, res, next) => {
+    let { notes, description, completed, project_id } = req.body;
+    if (typeof notes !== 'string' || notes.trim() === '') {
+        next({
+            message: 'Must provide valid notes and description.',
+            status: 400
+        });
+        return;
+    }
+    if (typeof description !== 'string' 
+        || description.trim() === ''
+        || description.trim().length > 128) {
+        next({
+            message: 'Must provide valid name and description. Description max character length is 128.',
+            status: 400
+        });
+        return;
+    }
+    if (typeof project_id !== 'number') {
+        next({
+            message: 'Project ID must be set as a number',
+            status: 400
+        });
+        return;
+    }
+    if (typeof completed !== "boolean") {
+        next({
+            message: 'Completed status must be set as true or false.',
+            status: 400
+        });
+        return;
+    }
+    notes = notes.trim();
+    description = description.trim();
+    req.body = { notes, description, project_id, completed };
+    next();
+}
+
 module.exports = {
     validateActionId,
-    validateActionPost
+    validateActionPost,
+    validateActionUpdate
 }
