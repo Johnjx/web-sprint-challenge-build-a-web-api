@@ -20,4 +20,18 @@ router.post('/', validateActionPost, (req, res, next) => {
     .catch(next);
 })
 
+router.delete('/:id', validateActionId, (req, res, next) => {
+    actionsModel.remove(req.params.id)
+    .then(deleteCount => {
+        if (!deleteCount) {
+            next({
+                message: 'Action could not be deleted at this time.'
+            });
+            return;
+        }
+        res.status(200).end();
+    })
+    .catch(next)
+})
+
 module.exports = router;
