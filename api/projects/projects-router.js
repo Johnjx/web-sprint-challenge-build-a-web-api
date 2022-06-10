@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const projectsModel = require('./projects-model');
-const { validateProjectId, validateProjectPost } = require('./projects-middleware');
+const { validateProjectId,
+        validateProjectPost,
+        validateProjectUpdate } = require('./projects-middleware');
 
 router.get('/', (req, res, next) => {
    projectsModel.get()
@@ -31,6 +33,12 @@ router.delete('/:id', validateProjectId, (req, res, next) => {
         res.status(200).end();
     })
     .catch(next)
+})
+
+router.put('/:id', validateProjectId, validateProjectUpdate, (req, res, next) => {
+    projectsModel.update(req.params.id, req.body)
+    .then(updatedProject => res.json(updatedProject))
+    .catch(next);
 })
 
 module.exports = router;

@@ -24,7 +24,8 @@ const validateProjectPost = (req, res, next) => {
             status: 400
         });
         return;
-    } if (!description || typeof description !== 'string' || description.trim() === '') {
+    } 
+    if (!description || typeof description !== 'string' || description.trim() === '') {
         next({
             message: 'Must provide name and description.',
             status: 400
@@ -55,7 +56,38 @@ const validateProjectPost = (req, res, next) => {
     next();
 }
 
+const validateProjectUpdate = (req, res, next) => {
+    let { name, description, completed } = req.body;
+    if (!name || typeof name !== 'string' || name.trim() === '') {
+        next({
+            message: 'Must provide name and description.',
+            status: 400
+        });
+        return;
+    }
+    if (!description || typeof description !== 'string' || description.trim() === '') {
+        next({
+            message: 'Must provide name and description.',
+            status: 400
+        });
+        return;
+    }
+    if (completed === null || typeof completed !== 'boolean') {
+        next({
+            message: 'Must provide a completed status as true or false.',
+            status: 400
+        });
+        return;
+    }
+
+    name = name.trim();
+    description = description.trim();
+    req.body = { name, description, completed };
+    next();
+}
+
 module.exports = {
     validateProjectId,
-    validateProjectPost
+    validateProjectPost,
+    validateProjectUpdate
 }
