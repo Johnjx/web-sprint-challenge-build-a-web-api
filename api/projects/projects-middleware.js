@@ -5,7 +5,7 @@ const validateProjectId = (req, res, next) => {
     .then(result => {
         if (result == null) {
             next({
-                message: 'User not found.',
+                message: 'Project not found.',
                 status: 404
             });
             return;
