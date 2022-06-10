@@ -19,4 +19,18 @@ router.post('/', validateProjectPost, (req, res, next) => {
     .catch(next);
 })
 
+router.delete('/:id', validateProjectId, (req, res, next) => {
+    projectsModel.remove(req.params.id)
+    .then(deleteCount => {
+        if (!deleteCount) {
+            next({
+                message: 'Project could not be deleted at this time.'
+            });
+            return;
+        }
+        res.status(200).end();
+    })
+    .catch(next)
+})
+
 module.exports = router;
