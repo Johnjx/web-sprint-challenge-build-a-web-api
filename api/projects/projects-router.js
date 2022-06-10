@@ -41,4 +41,10 @@ router.put('/:id', validateProjectId, validateProjectUpdate, (req, res, next) =>
     .catch(next);
 })
 
+router.get('/:id/actions', validateProjectId, (req, res, next) => {
+    projectsModel.getProjectActions(req.params.id)
+    .then(actionsArr => res.json(actionsArr))
+    .catch(next);
+})
+
 module.exports = router;
