@@ -147,7 +147,21 @@ We have provided test data for all the resources.
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. The core features of Node.js and Express and why they are useful.
+
+    Node.js and Express, together, make up a powerful package to create a web server using Javascript. With the advent of Node.js, developers could execute JS code in an environment outside of the browser, enabling the use of a single programming language that is very effective at front-end and back-end code. Along with many new possibilities, Node provided built-in support for HTTP server functionality. However, Express was a package that was built to enhance and simplify that base tooling. Express allows us to adhere to modularity in our code by using routing and non-routing middleware to disperse request handlers in our server.  
+
 1. Understand and explain the use of Middleware.
+
+    Middleware is a term to describe functions that are placed in between a function chain. In Express this middleware can control the movement of a request to its desired server endpoint, fully denying the endpoint if need be. These functions exist in Express but can also be custom-built by the developer or simply installed from a third party. There are many ways to use middleware, such as access logging and user input validation, and it can be placed at several different scopes of an application.  
+
 1. The basic principles of the REST architectural style.
+
+    REST is a data-focused design principle for building server-side web applications. With REST, resources are grouped into general endpoints and based on the HTTP method that is received the corresponding state is transferred between client and server while interacting with a database if present. Some resources are placed directly into a request path and queries are used to further filter those resources. Moreover, each HTTP verb is indicative of the type of CRUD interaction the client is attempting to communicate.   
+
 1. Understand and explain the use of Express Routers.
+
+    Express routers are a type of built-in middleware intercepting client requests, based on pathing, before they get to a catch-all server endpoint. Routers are a great feature of Express that allows for the separation of concerns with regard to handling user requests. They also closely align with REST principles because we are able to section off particular resources of our application and re-use the route path along with HTTP verbs to manage requests in one place.
+
 1. Describe tooling used to manually test the correctness of an API.
+
+    A very helpful tool when building out an API is an API client such as Postman, which provides a GUI to easily imitate client requests, clearly see server responses, and save the occurrence of that cycle for future reference. These tools keep your workflow very organized by enabling you to section off requests for a particular class of endpoints and even bring this data with you anywhere you go. This practice saves a lot of time when testing server-side code. 
